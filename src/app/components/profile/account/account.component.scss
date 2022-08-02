@@ -1,0 +1,19 @@
+.bg-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+@media (max-width: 768px) {
+    .mw {
+        min-width: 40vw;
+    }
+}
+
+@media (min-width: 768px) {
+    .mw {
+        min-width: 25vw;
+    }
+}

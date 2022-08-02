@@ -1,0 +1,134 @@
+* {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    color: white;
+}
+
+fa-icon:hover {
+    color: #990098;
+    cursor: pointer;
+}
+
+fa-icon {
+    color: white;
+    margin-left: 5px;
+}
+
+.side-header-bg {
+    background: linear-gradient(308deg, #167694 0%, #073271 73.09%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    flex-grow: 5;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+h3 {
+    margin-top: 15px;
+}
+
+.side-header-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.side-header-profile {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+}
+
+.side-header-footer {
+    // display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    color: white;
+    max-width: 20vw;
+    // padding-right: 20px;
+}
+
+.show-no {
+    display: none;
+}
+
+.drop-i {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    // flex-wrap: nowrap;
+    // min-width: fit-content;
+}
+
+.active,
+.side-hover:hover {
+    padding-left: 5px;
+    // border-right: 0px;
+    // margin-right: 0px;
+    // margin-left: 5px;
+    background: #F5F9FA;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+
+    h3 {
+        color: #24255D;
+    }
+
+    p {
+        color: #24255D;
+    }
+
+    fa-icon {
+        color: #990098;
+        border-image-source: #E81653;
+    }
+}
+
+
+@media (max-width: 768px) {
+    h3 {
+        display: none;
+    }
+
+    .side-header-footer {
+        display: none;
+    }
+
+    .side-header-bg {
+        max-width: 10vw;
+        min-height: 100vh;
+    }
+
+    fa-icon {
+        margin: 20px;
+    }
+
+    .side-header-list {
+        padding-left: 8px;
+    }
+}
+
+@media (min-width: 769px) {
+    .side-header-bg {
+        min-width: 15vw;
+        max-width: 17vw;
+        min-height: 100vh;
+    }
+
+    .side-header-list {
+        padding-left: 20px;
+    }
+}

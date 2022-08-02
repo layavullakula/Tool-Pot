@@ -1,0 +1,18 @@
+<div class="home-bg">
+    <div style="display: flex;">
+        <app-side-header>
+        </app-side-header>
+        <div class="home-bg-right container">
+            <app-header style="max-height: 15vh;" class="fixed-top"></app-header>
+            <!-- <div class="container" style="min-height: 75vh;">
+                <div class=" row"> -->
+            <app-admin-home class="row m-top" *ngIf="admin"></app-admin-home>
+            <!-- *ngIf="admin" -->
+            <app-user-home class="col-12" *ngIf="!admin"></app-user-home>
+            <!-- </div>
+            </div> -->
+        </div>
+
+    </div>
+
+</div>

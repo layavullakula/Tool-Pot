@@ -1,0 +1,169 @@
+<div class="project-bg">
+    <div style="display: flex;">
+        <app-side-header>
+        </app-side-header>
+        <div class="project-bg-right container">
+            <app-header [class.don]="showP" [class.done]="!showP"></app-header>
+            <div class="row sty">
+                <div class="project-header col-12">
+                    <h3>Projects</h3>
+                    <button (click)="addP()" class="project-btn">
+                        <fa-icon [icon]="add" style="color: white;"></fa-icon>
+                        New project
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="!loading" class="row">
+                <div class="card col-12 col-md-3 shadow-lg m-4" *ngFor="let i of projectsList">
+                    <div class="card-header">
+                        <span [class.btn-done]="i.Status=='Done'" [class.btn-pending]="i.Status=='Pending'"
+                            [class.btn-progress]="i.Status=='In progress'">{{i.Status}}</span>
+                        <h4>{{i.ProjectName | titlecase}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>{{i.ProjectDescription}}</p>
+                        <div *ngIf="i.team" class="card-img">
+                            <div *ngFor="let j of i.team">
+                                <!-- <p *ngIf="j.url">{{j.url}}</p> -->
+                                <img *ngIf="j.url" class="profile-img" src={{j.url}} alt="profile" title={{j.email}} />
+                                <fa-icon *ngIf="!j.url" [icon]="user" class="profile-icon" title={{j.email}}>
+                                </fa-icon>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="card-footer">
+                        <div class="actions d-flex justify-content-between px-4">
+                            <a class="action-item">
+                                <fa-icon [icon]="edit" style="color: #990098;" (click)="editProject(i)"></fa-icon><i
+                                    class="far fa-comment"></i>
+                            </a>
+                            <a class="action-item text-danger">
+                                <fa-icon [icon]="trash" (click)="deletProject(i)" style="color: red;"></fa-icon><i
+                                    class="far fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div *ngIf="loading">
+                <app-loading-page></app-loading-page>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div *ngIf="showP">
+    <div class="back-form-popup" (click)="onClose()"></div>
+    <div class="form-popup">
+        <div class="container">
+            <div class="row">
+                <h1 class="col-12 text-center text-white">
+                    {{editMode ? 'UPDATE' : 'ADD'}} PROJECT
+                </h1>
+                <form [formGroup]="addProject" (ngSubmit)="addProjectDetails()"
+                    class="col-12 card shadow-lg bg-white rounded p-5">
+                    <div class="form-li">
+                        <label class="mt-1">Project Name</label>
+                        <div>
+                            <input type="text" formControlName="project_name" class="form-control mb-1 form-i"
+                                placeholder="Enter The Project Name" />
+                            <div *ngIf="addProject.get('project_name')?.errors  && submitted">
+                                <div *ngIf="addProject.get('project_name')?.hasError('required')">
+                                    <span style="color: red;">*Please Enter Project Name.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-li">
+                        <label class="mt-1">Description</label>
+                        <div>
+                            <input formControlName="description" class="form-control mb-1 form-i" type="text"
+                                placeholder="Enter The Description" />
+                            <div *ngIf="addProject.get('description')?.errors  && submitted">
+                                <div *ngIf="addProject.get('description')?.hasError('required')">
+                                    <span style="color: red;">*Please Enter description.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-li">
+                        <label class="mt-1">Start Date</label>
+                        <div>
+                            <input formControlName="start_date" class="form-control mb-1 form-i" type="date" />
+                            <div *ngIf="addProject.get('start_date')?.errors  && submitted">
+                                <div *ngIf="addProject.get('start_date')?.hasError('required')">
+                                    <span style="color: red;">*Please Enter Project Start Date.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-li">
+                        <label class="mt-1">End Date</label>
+                        <div>
+                            <input formControlName="end_date" class="form-control mb-1 form-i" type="date" />
+                            <div *ngIf="addProject.get('end_date')?.errors  && submitted">
+                                <div *ngIf="addProject.get('end_date')?.hasError('required')">
+                                    <span style="color: red;">*Please Enter Project End Date.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-li">
+                        <label class="mt-1">Status</label>
+                        <div>
+                            <!-- <input formControlName="status" class="form-control mb-1 form-i" type="text"
+                                placeholder="Enter The Status" /> -->
+                            <select formControlName="status" class="form-select mb-1 form-i">
+                                <!-- <option>Select Status</option> -->
+                                <option value="Pending">Pending</option>
+                                <option value="Done">Done</option>
+                                <option value="In progress">In progress</option>
+                            </select>
+                            <div *ngIf="addProject.get('status')?.errors  && submitted">
+                                <div *ngIf="addProject.get('status')?.hasError('required')">
+                                    <span style="color: red;">*Please Enter Project Status.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-popup-actions">
+                        <button type="submit" class="btn mt-2 text-white "
+                            style=" background: linear-gradient(273.22deg, #E81653 0%, #990098 101.78%);">
+                            {{editMode ? 'UPDATE' : 'ADD'}}
+                        </button>
+                        <button type="button" class="btn mt-2 mx-2" style="border: 2px solid #E81653;color: #990098;"
+                            (click)="onClose()">
+                            CANCEL
+                        </button>
+                        <p>
+                            {{error}}
+                        </p>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

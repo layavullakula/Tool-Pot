@@ -1,0 +1,108 @@
+* {
+    margin: 0px;
+}
+
+.active:hover {
+    background-color: #F5F9FA;
+    color: black;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.profile-bg {
+    background: #F5F9FA;
+    min-width: 80vw;
+    min-height: 80vh;
+}
+
+.profile-bg-right {
+    max-height: 100vh;
+    overflow-x: scroll;
+}
+
+.profile-btn {
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    padding: 5px;
+    // color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: 5px;
+    font-size: 17px;
+    width: 15vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.r-active {
+    background-color: red;
+    color: white;
+}
+
+.hori {
+    width: 100%;
+    color: black;
+}
+
+.borEnable {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-card {
+    // background-image: linear-gradient(to right, #f27583, #f28c63);
+    // padding-top: 20px;
+    // padding-left: 20px;
+    // padding-bottom: 20px;
+    // padding-right: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .sty {
+        margin-top: 25%;
+    }
+
+    .laptopView {
+        display: none;
+    }
+
+    .tabletView {
+        display: black;
+        width: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 80vw;
+        min-height: 60vh;
+    }
+}
+
+@media (min-width: 769px) {
+    .sty {
+        margin-top: 13%;
+    }
+
+    .laptopView {
+        display: flex;
+        // justify-content: flex-start;
+        // align-items: center;
+        // min-height: 100%;
+        // min-width: 100%;
+        margin-bottom: 10vh;
+    }
+
+    .tabletView {
+        display: none;
+    }
+}

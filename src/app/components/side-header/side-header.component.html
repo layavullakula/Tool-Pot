@@ -1,0 +1,87 @@
+<div class="side-header-bg">
+
+
+    <div *ngIf="admin" class="side-header-list">
+        <h1>TOOL POT</h1>
+        <a class="side-header-profile side-hover" routerLink="/profile/account" routerLinkActive="active">
+            <img *ngIf="profileData.Url" src={{profileData.Url}}
+                style="height: 50px;width:50px;border-radius:30px;margin-right:20px" />
+            <fa-icon *ngIf="!profileData.Url" [icon]="profile" style="margin-right:2px;"></fa-icon>
+            <h3>
+                {{profileData.Name | titlecase}}
+                <!-- <fa-icon [icon]="dropdown" style="margin-left:5px;"></fa-icon> -->
+            </h3>
+        </a>
+        <a class="side-hover drop-i" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+
+            <fa-icon [icon]="dashboard" style="margin-right: 2px;"></fa-icon>
+            <h3>
+                Dashboard
+            </h3>
+        </a>
+        <a class="drop-i side-hover" routerLink="/admin/users" routerLinkActive="active">
+
+            <fa-icon [icon]="users" style="margin-right: 2px;"></fa-icon>
+            <h3>
+                Users
+            </h3>
+        </a>
+        <a class="drop-i side-hover" routerLink="/admin/projects" routerLinkActive="active">
+
+            <fa-icon [icon]="projects" style="margin-right: 2px;"></fa-icon>
+            <h3>
+                Projects
+            </h3>
+        </a>
+        <a class="drop-i side-hover" routerLink="/admin/tools" routerLinkActive="active">
+
+            <fa-icon [icon]="tools" style="margin-right: 2px;"></fa-icon>
+            <h3>
+                Tools
+            </h3>
+        </a>
+        <a class="drop-i side-hover" routerLink="/admin/privileges" routerLinkActive="active">
+
+            <fa-icon [icon]="privileges" style="margin-right: 2px;"></fa-icon>
+            <h3>
+                Privileges
+            </h3>
+        </a>
+        <!-- </div> -->
+    </div>
+
+    <div *ngIf="!admin" class="side-header-list">
+        <h1>TOOL POT</h1>
+        <a class="side-header-profile side-hover" routerLink="/profile/account" routerLinkActive="active">
+
+            <img *ngIf="profileData.Url" src={{profileData.Url}}
+                style="height: 50px;width:50px;border-radius:30px;margin-right:20px" />
+            <fa-icon *ngIf="!profileData.Url" [icon]="profile" style="margin-right:2px;"></fa-icon>
+            <h3>
+                {{profileData.Name | titlecase }}
+                <!-- <fa-icon [icon]="dropdown" style="margin-left:5px;"></fa-icon> -->
+            </h3>
+        </a>
+        <a class="side-hover drop-i" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+
+            <fa-icon [icon]="dashboard" style="margin-right: 2px;"></fa-icon>
+            <h3>
+                Dashboard
+            </h3>
+        </a>
+        <a class="drop-i side-hover" routerLink="/user/project" routerLinkActive="active">
+
+            <fa-icon [icon]="projects" style="margin-right: 2px;"></fa-icon>
+            <h3>
+                Projects
+            </h3>
+        </a>
+    </div>
+
+    <div class="side-header-footer">
+        <fa-icon [icon]="faGoogle"></fa-icon>
+        <fa-icon [icon]="faTwitter"></fa-icon>
+        <fa-icon [icon]="faInstagram"></fa-icon>
+        <fa-icon [icon]="faYoutube"></fa-icon>
+    </div>
+</div>

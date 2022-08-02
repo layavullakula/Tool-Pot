@@ -1,0 +1,21 @@
+<div class="header-bg fixed-top">
+    <!-- <button class="header-btn">
+        <fa-icon [icon]="add" style="background-color: transparent;color: white;margin-right: 2px;"></fa-icon>
+        Create new project
+    </button> -->
+
+    <form (ngSubmit)="onSearch()" [formGroup]="searchForm" class="header-search" style="max-width: 50vw;">
+        <input class="form-control" formControlName="search" placeholder="Search Meds Availability" />
+        <fa-icon [icon]="search" class="header-search-btn"></fa-icon>
+    </form>
+
+    <div style="max-width: 50vw;">
+        <fa-icon [icon]="home" (click)="homeN()"></fa-icon>
+        <fa-icon [icon]="users" (click)="profileA()"></fa-icon>
+        <!-- <fa-icon [icon]="projects"></fa-icon>
+        <fa-icon [icon]="tools"></fa-icon>
+        <fa-icon [icon]="privileges"></fa-icon> -->
+        <fa-icon [icon]="logout" (click)="Logout()"></fa-icon>
+    </div>
+
+</div>

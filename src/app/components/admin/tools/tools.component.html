@@ -1,0 +1,111 @@
+<div class="tools-bg">
+    <div style="display: flex;">
+        <app-side-header>
+        </app-side-header>
+        <div class="tools-bg-right container">
+            <app-header *ngIf="!showP" style="max-height: 15vh;"></app-header>
+            <div class="row sty">
+                <div class="tools-header col-12">
+                    <h3>Tools</h3>
+                    <button class="tools-btn" (click)="addT()">
+                        <fa-icon [icon]="add" style="color: white;margin-right: 5px;"></fa-icon>
+                        New Tool
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="!loading" class="row">
+                <div class="col-xl-3 col-lg-4 col-sm-6 col-12" *ngFor="let i of tools">
+                    <div class="m-2">
+                        <div class="card shadow-lg">
+                            <!-- <div class="card-header border-0 pb-0">
+                                <div class="text-center">
+                                    <h1 class="mb-0">{{i.name}}</h1>
+                                </div>
+                            </div> -->
+                            <div class="card-body text-center mt-1 mb-1">
+                                <h3>{{i.name}}</h3>
+                                <a href={{i.link}} target="_blank">
+                                    <p>
+                                        <fa-icon [icon]="toolLink"></fa-icon>
+                                        Tool Link
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="actions d-flex justify-content-between px-4">
+                                    <a class="action-item">
+                                        <fa-icon [icon]="edit" (click)="editTool(i)" style="color: #990098;"></fa-icon>
+                                        <i class="far fa-comment"></i>
+                                    </a>
+                                    <a class="action-item text-danger">
+                                        <fa-icon [icon]="trash" (click)="deleteTool(i)" style="color: red;">
+                                        </fa-icon><i class="far fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div *ngIf="loading" class="row">
+                <app-loading-page class="col-12"></app-loading-page>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div *ngIf="showP">
+    <div class="back-form-popup" (click)="onClose()"></div>
+    <div class="form-popup">
+        <div class="container">
+            <div class="row">
+                <h1 class="col-12 text-center text-white">
+                    {{editMode ? 'UPDATE' : 'ADD'}} TOOL
+                </h1>
+                <form [formGroup]="addTool" (ngSubmit)="addTools()" class="col-12card shadow-lg bg-white rounded p-5">
+                    <div class="form-li">
+                        <label class="mt-1">Tool Name</label>
+                        <input formControlName="name" class="form-control mb-1 form-i" type="text"
+                            placeholder="Enter The Tool Name" />
+                        <div *ngIf="addTool.get('name')?.errors  && submitted">
+                            <div *ngIf="addTool.get('name')?.hasError('required')">
+                                <span style="color: red;">Please Enter Tool Name.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-li">
+                        <label class="mt-1">Tool Link</label>
+                        <input formControlName="link" class="form-control mb-1 form-i" type="text"
+                            placeholder="Paste The Tool Link" />
+                        <div *ngIf="addTool.get('link')?.errors  && submitted">
+                            <div *ngIf="addTool.get('link')?.hasError('required')">
+                                <span style="color: red;">Please Enter Tool Link.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-popup-actions">
+                        <button type="submit" class="btn mt-2 text-white "
+                            style="background: linear-gradient(273.22deg, #E81653 0%, #990098 101.78%);">
+                            {{editMode ? 'UPDATE' : 'ADD'}}
+                        </button>
+                        <button type="button" class="btn mt-2 mx-2" style="border: 2px solid #E81653;color: #990098;"
+                            (click)="onClose()">
+                            CANCEL
+                        </button>
+                        <!-- <p>
+                            {{error}}
+                        </p> -->
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

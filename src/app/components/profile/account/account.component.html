@@ -1,0 +1,50 @@
+<div *ngIf="!loading" class="bg-profile">
+
+    <h3>Personal Details</h3>
+    <form [formGroup]="addForm" (ngSubmit)="updateDate()" style="padding: 20px;">
+
+        <div>
+            <label class="form-label">Username</label>
+            <p *ngIf="!editMode" class="form-control" (click)="edi()">
+                {{profile.Name? profile.Name: 'Enter Name'}}</p>
+            <input *ngIf="editMode" class="form-control" formControlName="Name" type="text" placeholder="Enter Name"
+                ngModel={{profile.Name}} />
+            <!-- <p>{{profile.Name ? profile.Name: ''}}</p> -->
+        </div>
+        <div>
+            <label class="form-label">Email</label>
+            <p *ngIf="!editMode" class="form-control" (click)="editMode = !editMode">
+                {{profile.email? profile.email: 'Enter Email'}}</p>
+            <input *ngIf="editMode" class="form-control" formControlName="email" type="text" placeholder="Enter Email"
+                ngModel={{profile.email}} />
+        </div>
+
+        <div>
+            <label class="form-label">Phone Number</label>
+            <p *ngIf="!editMode" class="form-control" style="min-width: 25vw;" (click)="editMode = !editMode">
+                {{profile.Ph ? profile.Ph : 'Enter Phone Number'}}</p>
+            <input *ngIf="editMode" class="form-control" formControlName="Ph" type="text"
+                placeholder="Enter Phone Number" ngModel={{profile.Ph}} />
+        </div>
+
+        <!-- <div>
+            <label class="form-label">Password</label>
+            <p class="form-control mw">{{ passwordChange }}</p>
+        </div> -->
+
+        <div>
+            <button type="submit" class="btn mt-2"
+                style="background: linear-gradient(273.22deg, #E81653 0%, #990098 101.78%);border:2px solid #990098;color: white;"
+                [disabled]="!editMode">Update</button>
+            <button type="button" class="btn mt-2" style="color: #E81653;border:2px solid #990098;"
+                [disabled]="!editMode">Cancel</button>
+        </div>
+    </form>
+</div>
+
+
+
+<div *ngIf="loading"
+    style="min-width: 200px;min-height: 300px;display: flex;justify-content: center;align-items: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>

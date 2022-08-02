@@ -1,0 +1,43 @@
+<div class="login-background"
+    style="background-image: linear-gradient(267.51deg, rgba(40, 223, 192, 0.6) 3.54%, rgba(28, 197, 255, 0.6) 97.56%), url('../../../assets/images/bg-img.png')">
+    <div class="login-logo">
+        <h1 style="font-weight: bold;">TOOL POT</h1>
+    </div>
+
+    <div class="card" style="align-self:center;">
+        <div class="card-header text-center">
+            <h1>Login</h1>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="formss" (ngSubmit)="onLogin()">
+
+                <input type="text" class="form-control" formControlName="emailFormControl" placeholder="E-mail" />
+                <div *ngIf="formss.get('emailFormControl')?.errors  && submitted">
+                    <div *ngIf="formss.get('emailFormControl')?.hasError('required')">
+                        <span style="color: red;">*Please Enter Email.</span>
+                    </div>
+                    <div *ngIf="formss.get('emailFormControl')?.hasError('email')">
+                        <span style="color: red;">*Please Enter Valid Email.</span>
+                    </div>
+                </div>
+                <br />
+                <input type="password" class="form-control" formControlName="passwordFormControl"
+                    placeholder="Password" />
+                <div *ngIf="formss.get('passwordFormControl')?.errors  && submitted">
+                    <div *ngIf="formss.get('passwordFormControl')?.hasError('required')">
+                        <span style="color: red;">*Please Enter Password.</span>
+                    </div>
+                    <div *ngIf="pswdError || formss.get('passwordFormControl')?.hasError('minLength')">
+                        <span style="color: red;">*Please Enter Min 6 Length.</span>
+                    </div>
+                </div>
+
+                <p class="login-forgot" style="display: flex;justify-content:flex-end;">Forgot
+                    Password?
+                </p>
+                <button type="submit" class="login-btn form-control">Login</button>
+                <p *ngIf="errorMsg" class="text-danger">*{{errorMsg.slice(1,-1)}}</p>
+            </form>
+        </div>
+    </div>
+</div>

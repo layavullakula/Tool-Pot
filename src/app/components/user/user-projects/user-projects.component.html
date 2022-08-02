@@ -1,0 +1,59 @@
+<div class="project-bg">
+    <div style="display: flex;">
+        <app-side-header>
+        </app-side-header>
+        <div>
+            <app-header></app-header>
+            <div class="container content-top" style="min-height: 80vh;min-width: 80vw;">
+                <div>
+                    <h3>User Projects</h3>
+                </div>
+                <div *ngIf="!loading && project.length >= 1" class="row">
+
+                    <div class="col-lg-3 col-md-4 col-12" *ngFor="let i of project">
+                        <div class="m-2">
+                            <div (click)="navigateToTools(i.id)" class="card border border-dark shadow ho">
+                                <div class="card-header border-0 pb-0">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h5 class="mb-0">{{i.StartDate | date: 'mediumDate'}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center mt-1 mb-1">
+                                    <h3>{{i.ProjectName | titlecase}}</h3>
+
+                                    <span class="clearfix"></span>
+                                    <span class="btn btn-warning" [class.btn-pending]="i.Status == 'Pending'"
+                                        [class.btn-progress]="i.Status == 'In progess'"
+                                        [class.btn-done]="i.Status == 'Done'">{{i.Status}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div *ngIf="!loading && project.length==0 && !error" class="row">
+                    <img src="../../../../../assets/images/undraw_relaxation_re_ohkx.svg" alt="no-tool"
+                        style="height: 40vh;margin-top: 10vh;" />
+                    <h2 class="col-12 text-center">Not Yet Assigned In Projects</h2>
+
+                </div>
+
+                <div *ngIf="!loading && error && project.length != 0" class="row"
+                    style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                    <img src="../../../../assets/images/undraw_feeling_blue_-4-b7q.svg" alt="no-tool"
+                        style="height: 40vh;margin-top: 10vh;" />
+                    <h2 class="col-12 text-center">{{error}}</h2>
+                    <button class="btn btn-danger text-center" style="width: 200px;" (click)="retry()"> Retry</button>
+
+                </div>
+
+                <div *ngIf="loading" class="row">
+                    <app-loading-page></app-loading-page>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

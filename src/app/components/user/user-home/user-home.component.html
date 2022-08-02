@@ -1,0 +1,23 @@
+<div class="container user-bg">
+    <div class="row">
+        <div class="card col-md-3 col-12" style="max-height: 300px;margin: 10px;" routerLink="/user/project">
+            <div>
+                <h3>Projects</h3>
+                <h2>{{ProjectsCount}}</h2>
+            </div>
+            <fa-icon [icon]="project"></fa-icon>
+
+        </div>
+
+        <div class="card col-md-4 col-12" style="max-height: 300px;margin: 10px;">
+            <div>
+                <h3>Tools</h3>
+                <h2>{{ToolsCount}}</h2>
+            </div>
+            <fa-icon [icon]="tool"></fa-icon>
+
+        </div>
+
+
+    </div>
+</div>

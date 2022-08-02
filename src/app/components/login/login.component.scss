@@ -1,0 +1,96 @@
+* {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.login-logo {
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+.card {
+    background: #F5F9FA;
+    border-radius: 6px;
+    min-width: 30%;
+    min-height: 376px;
+    // min-height: 50vh;
+}
+
+input {
+    min-width: 362px;
+    min-height: 56px;
+}
+
+button {
+    min-width: 362px;
+    min-height: 44px;
+}
+
+.card-header {
+    margin-top: 7vh;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+}
+
+.login-btn {
+    background: linear-gradient(271.03deg, #1DC0FD 0.42%, #1D77FF 99.65%);
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+    border: none;
+}
+
+.card-header {
+    background-color: #F5F9FA;
+    border-bottom: none;
+}
+
+.login-forgot {
+    background: linear-gradient(271.03deg, #1DC0FD 0.42%, #1D77FF 99.65%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    // text-fill-color: transparent;
+}
+
+@media (max-width:768px) {
+    .login-background {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 100vw;
+        min-height: 100vh;
+        background-size: cover;
+        padding: 20px;
+    }
+
+    .login-logo {
+        align-self: center;
+    }
+}
+
+@media (min-width: 769px) {
+    .login-background {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-width: 100vw;
+        min-height: 100vh;
+        background-size: cover;
+        padding: 20px;
+    }
+
+    .login-logo {
+        align-self: flex-start;
+        margin-top: 20px;
+    }
+}

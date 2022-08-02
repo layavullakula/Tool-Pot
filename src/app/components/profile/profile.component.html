@@ -1,0 +1,121 @@
+<div class="profile-bg">
+  <div style="display: flex;">
+    <app-side-header>
+    </app-side-header>
+    <div class="profile-bg-right container">
+      <app-header style="max-height: 15vh;"></app-header>
+      <div class="row sty">
+        <h3>Profile</h3>
+      </div>
+
+      <div *ngIf="!loading" style="min-width: 100vw;">
+        <div *ngIf="!profile" class="row" style="min-height: 80vh;">
+          <img src="../../../../../assets/images/undraw_page_not_found_re_e9o6.svg" alt="no-tool"
+            style="height: 40vh;margin-top: 10vh;" />
+          <h2 class="col-12 text-center">User No Longer A Customer</h2>
+
+        </div>
+
+        <div *ngIf="profile" class="laptopView">
+          <div class="bg-white mb-5 rounded">
+            <div class="d-flex">
+              <div class="profile-card p-3">
+                <div class="text-center m-3" style="background-color: white;">
+                  <img *ngIf="!profile.Url && !imgLoading" (click)="inputField.click()"
+                    src="../../../../assets/images/profile.png" alt="profile"
+                    style="width: 200px;height: 200px;border-radius: 100px;" />
+                  <img *ngIf="profile.Url && !imgLoading" (click)="inputField.click()" src={{profile.Url}} alt="profile"
+                    style="width: 300px;height: 300px;border-radius: 150px;" />
+                  <input #inputField type="file" hidden (change)="profileDpUpload($event)" />
+
+                  <div *ngIf="imgLoading">
+                    <app-loading-spinner></app-loading-spinner>
+                  </div>
+
+                </div>
+                <!-- <div> -->
+                <button class="profile-btn" routerLink="/profile/account" routerLinkActive="active">
+                  Account
+                </button>
+                <!-- </div> -->
+                <!-- <div> -->
+                <button class="profile-btn" routerLink="/profile/change-password" routerLinkActive="active">
+                  Reset
+                </button>
+                <!-- </div> -->
+                <!-- <div>
+                  <button class="btn btn-danger" style="font-size: 17px;width: 15vw;" (click)="Logout()">Logout</button>
+                </div> -->
+              </div>
+
+              <div class="d-flex flex-column" style="background-color: #F5F9FA;min-width: 20px;border: none;">
+              </div>
+              <div class="pl-2" style="margin-left: 5vw;margin-right: 5vw;">
+                <router-outlet></router-outlet>
+              </div>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="profile" class="tabletView">
+          <div class="card border border-primary" style="min-width: 60vw;">
+            <h5 class="card-header text-white" style="background-image: linear-gradient(to right, #5680e9, #5ab9ea, #8860d0);
+                color: white;">Profile</h5>
+            <div class="card-body" style="display: flex;flex-direction: column;align-items: center;">
+              <div style="display: flex;flex-direction: column;justify-content: center;">
+                <div class="text-center mb-5">
+                  <img *ngIf="!profile.Url && !imgLoading" (click)="inputField.click()"
+                    src="../../../../assets/images/profile.png" alt="profile"
+                    style="width: 100px;height: 100px;border-radius: 60px;" />
+                  <img *ngIf="profile.Url && !imgLoading" (click)="inputField.click()" src={{profile.Url}} alt="profile"
+                    style="width: 100px;height: 100px;border-radius: 60px;" />
+                  <input #inputField type="file" hidden (change)="profileDpUpload($event)" />
+
+                  <div *ngIf="imgLoading">
+                    <app-loading-spinner></app-loading-spinner>
+                  </div>
+
+                </div>
+                <div style="border: 1px solid gray;padding: 5px;border-radius: 5px;font-size: 17px;"
+                  routerLink="/profile/account" routerLinkActive="active" (click)="openAccount()">
+                  <div style="display: flex;justify-content: space-between;align-items: center;">
+                    Account
+                    <fa-icon *ngIf="!showAcc" [icon]="right"></fa-icon>
+                    <fa-icon *ngIf="showAcc" [icon]="down"></fa-icon>
+                  </div>
+                </div>
+                <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;"
+                  [class.borEnable]="showAcc">
+                  <app-account *ngIf="showAcc"></app-account>
+                </div>
+                <div style="border: 1px solid gray;padding: 5px;border-radius: 5px;font-size: 17px;"
+                  routerLink="/profile/change-password" routerLinkActive="active" (click)="openPswd()">
+                  <div style="display: flex;justify-content: space-between;align-items: center;">
+                    Change-password
+                    <fa-icon *ngIf="!showCP" [icon]="right"></fa-icon>
+                    <fa-icon *ngIf="showCP" [icon]="down"></fa-icon>
+                  </div>
+                </div>
+                <div style="padding: 5px;" [class.borEnable]="showCP">
+                  <app-change-password *ngIf="showCP"></app-change-password>
+                </div>
+
+                <div><button class="btn btn-danger" style="font-size: 17px;width: 40vw;"
+                    (click)="Logout()">Logout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="loading">
+        <app-loading-page></app-loading-page>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,50 @@
+<div class="project-bg">
+    <div style="display: flex;">
+        <app-side-header>
+        </app-side-header>
+
+
+        <div>
+            <div>
+                <app-header></app-header>
+            </div>
+            <div class="container content-bg" style="min-height: 80vh;min-width: 80vw;">
+                <h3>Project Tools</h3>
+                <div class="row" *ngIf="(!tools || tools.length==0) && !loading">
+                    <img src="../../../../../assets/images/undraw_empty_re_opql.svg" alt="no-tool"
+                        style="height: 40vh;margin-top: 10vh;" />
+                    <h2 class="col-12 text-center">Oops! No Project Tools</h2>
+                </div>
+                <div class="row" *ngIf="tools.length>=1 && !loading">
+
+
+                    <div class="col-lg-3 col-md-4 col-12" *ngFor="let i of tools">
+                        <div class="m-2">
+                            <div class="card hover-shadow-lg">
+                                <div class="card-header border-0 pb-0">
+                                    <div class="text-center">
+                                        <h3>{{i.name}}</h3>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center mt-1 mb-1">
+
+                                    <a href={{i.link}}>
+                                        <p>Tool Link</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div *ngIf="loading">
+                    <app-loading-page></app-loading-page>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

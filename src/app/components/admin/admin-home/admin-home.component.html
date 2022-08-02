@@ -1,0 +1,101 @@
+<div class="card c col-12 col-md-4 m-2" style="flex-direction: row;">
+    <div style="min-width: 60%;padding: 30px;">
+        <!-- <h5>Good Morning,</h5> -->
+        <h5>Today is {{d|date:'fullDate'}}</h5>
+    </div>
+
+    <div class="time-bg">
+        <fa-icon [icon]="clock"></fa-icon>
+        <p>Current Time</p>
+        <h5>{{time | date:'mediumTime' }}</h5>
+    </div>
+</div>
+<div class="card c col-12 col-md-2">
+    <fa-icon [icon]="projects"></fa-icon>
+    <app-loading-spinner *ngIf="loading1"></app-loading-spinner>
+    <p *ngIf="!loading1">Total {{projectsNo}} Projects</p>
+    <button class="admin-home-btn" routerLink="/admin/projects">Show More</button>
+</div>
+
+<div class="card c col-12 col-md-2">
+    <fa-icon [icon]="users"></fa-icon>
+    <app-loading-spinner *ngIf="loading1"></app-loading-spinner>
+    <p *ngIf="!loading1">Total {{usersNo}} Users</p>
+    <button class="admin-home-btn" routerLink="/admin/users">Show More</button>
+</div>
+
+<div class="card c col-12 col-md-2">
+    <fa-icon [icon]="tool"></fa-icon>
+    <app-loading-spinner *ngIf="loading1"></app-loading-spinner>
+    <p *ngIf="!loading1">Total {{toolsNo}} Tools</p>
+    <button class="admin-home-btn" routerLink="/admin/tools">Show More</button>
+</div>
+
+
+<div class="col-12 col-md-6" style="background-color: white;border-radius: 40px;margin: 10px;">
+    <p class="text-center" style="font-weight: bold;">Complete Number Of Data</p>
+    <app-loading-spinner *ngIf="loading1"></app-loading-spinner>
+    <div *ngIf="!loading1" echarts [options]="optionst" [theme]="'macarons'" class="demo-chart"></div>
+</div>
+
+<div class="col-12 col-md-4" style="background-color: white;border-radius: 40px;margin: 10px;">
+    <p class="text-center" style="font-weight: bold;">Projects Month Deadline</p>
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+    <div *ngIf="!loading" echarts [options]="options" theme="macarons" class="demo-chart"></div>
+</div>
+
+<div class="card col-12 col-md-5">
+    <h4 style="align-self: flex-start;">Currently Working Projects</h4>
+    <table class="table">
+        <tr style="border-bottom: 2px solid black;">
+            <th style="padding-left: 10px;">S.no</th>
+            <th>Project Name</th>
+            <th>End Date</th>
+            <th>Status</th>
+        </tr>
+        <tr *ngFor="let i of inPP">
+            <td style="padding-left: 10px;">{{inPP.indexOf(i)+1}}</td>
+            <td>{{i.ProjectName | titlecase}}</td>
+            <td>{{i.EndDate}}</td>
+            <td>{{i.Status | titlecase}}</td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+<div class="card col-12 col-md-3">
+    <h4 style="align-self: flex-start;">Latest Projects</h4>
+    <table class="table">
+        <tr style="border-bottom: 2px solid black;">
+            <th style="padding-left: 10px;">S.no</th>
+            <th>Project Name</th>
+        </tr>
+        <tr *ngFor="let i of project">
+            <td style="padding-left: 10px;">{{project.indexOf(i)+1}}</td>
+            <td>{{i.ProjectName}}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="card col-12 col-md-3">
+    <h4 style="align-self: flex-start;">Tools Used In Projects</h4>
+    <table class="table">
+        <tr style="border-bottom: 2px solid black;">
+            <th style="padding-left: 10px;">S.no</th>
+            <th>Tool Name</th>
+        </tr>
+        <tr *ngFor="let i of tools">
+            <td style="padding-left: 10px;">{{tools.indexOf(i)+1}}</td>
+            <td><a href={{i.link}} target="_blank">{{i.name}}</a></td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+<!-- <echarts [initOpts]="initOpts" [options]="option" class="col-12 col-md-5"></echarts> -->

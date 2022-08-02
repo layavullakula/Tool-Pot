@@ -1,0 +1,175 @@
+<div class="user-bg">
+    <div style="display: flex;">
+        <app-side-header>
+        </app-side-header>
+        <div class="user-bg-right container">
+            <app-header *ngIf="!showP" style="max-height: 15vh;"></app-header>
+            <div class="row sty">
+                <div class="users-header col-12">
+                    <h3>Users</h3>
+                    <button class="users-btn" (click)="addU()">
+                        <fa-icon [icon]="add" style="color: white;margin-right: 5px;"></fa-icon>
+                        New User
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="!loading" class="row">
+                <!-- <div class="row"> -->
+                <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let i of usersList">
+                    <div class="card-body bg-light rounded text-center border shadow-lg m-4 p-3">
+                        <div class="avatar-parent-child">
+                            <img *ngIf="!i.Url && i.Gender=='Male'" src="../../../../assets/images/male.svg"
+                                alt="profile" style="width: 100px;height: 100px;border-radius: 60px;" />
+                            <img *ngIf="!i.Url && i.Gender=='Female'" src="../../../../assets/images/female.svg"
+                                alt="profile" style="width: 100px;height: 100px;border-radius: 60px;" />
+                            <img *ngIf="i.Url" src={{i.Url}} alt="profile"
+                                style="width: 100px;height: 100px;border-radius: 60px;" />
+                        </div>
+                        <h3 class="mt-4 mb-0">
+                            <!-- <fa-icon [icon]="name"></fa-icon> -->
+                            {{i.Name | titlecase}}
+                        </h3>
+                        <p class="d-block text-sm text-muted mb-3">
+                            <fa-icon [icon]="mail"></fa-icon>
+                            {{i.email}}
+                        </p>
+                        <!-- <a class="d-block text-sm text-muted mb-3">{{i.Ph}}</a> -->
+
+                        <p>
+                            <fa-icon [icon]="phone"></fa-icon> {{i.Ph}}
+                        </p>
+                        <hr />
+                        <div class="actions d-flex justify-content-between px-4">
+                            <a class="action-item">
+                                <fa-icon [icon]="edit" class="icon" style="color: #990098;" (click)="editUser(i)">
+                                </fa-icon>
+                            </a>
+                            <!-- <a class="action-item">
+                                    <fa-icon [icon]="bell"></fa-icon>
+                                </a> -->
+                            <a class="action-item">
+                                <fa-icon [icon]="trash" class="icon" style="color: red;" (click)="deleteUser(i)">
+                                </fa-icon>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+
+            <div *ngIf="loading">
+                <app-loading-page></app-loading-page>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div *ngIf="showP">
+    <div class="back-form-popup" (click)="onClose()"></div>
+    <div class="form-popup">
+        <div class="container">
+            <div class="row">
+                <h1 class="col-12 text-center text-white">
+                    {{editMode ? 'UPDATE' : 'ADD'}} USER
+                </h1>
+                <form [formGroup]="addUser" (ngSubmit)="addAddDetails()"
+                    class="col-12card shadow-lg bg-white rounded p-5">
+                    <div class="form-li">
+                        <label class="mt-1">First Name</label>
+                        <div>
+                            <input type="text" formControlName="first_name" class="form-control mb-1 form-i"
+                                placeholder="Enter The Name" />
+                            <div *ngIf="addUser.get('first_name')?.errors  && submitted">
+                                <div *ngIf="addUser.get('first_name')?.hasError('required')">
+                                    <span style="color: red;">Please Enter First Name.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-li">
+                        <label class="mt-1">Email</label>
+                        <div>
+                            <input formControlName="email" class="form-control mb-1 form-i" type="text"
+                                placeholder="Enter The Email" />
+                            <div *ngIf="addUser.get('email')?.errors  && submitted">
+                                <div *ngIf="addUser.get('email')?.hasError('required')">
+                                    <span style="color: red;">Please Enter Email.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-li" *ngIf="!editMode">
+                        <label class="mt-1">Password</label>
+
+                        <div>
+                            <input formControlName="password" class="form-control mb-1 form-i" type="password"
+                                placeholder="Enter The Password" />
+                            <div *ngIf="addUser.get('password')?.errors  && submitted">
+                                <div *ngIf="addUser.get('password')?.hasError('required')">
+                                    <span style="color: red;">Please Enter Password.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-li">
+                        <label class="mt-1">Phone</label>
+                        <div>
+                            <input formControlName="ph" class="form-control mb-1 form-i" type="number"
+                                placeholder="Enter Phone Number" />
+                            <div *ngIf="addUser.get('ph')?.errors  && submitted">
+                                <div *ngIf="addUser.get('ph')?.hasError('required')">
+                                    <span style="color: red;">Please Enter Phone Number.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-li">
+                        <label class="mt-1">Gender</label>
+                        <div>
+                            <!-- <input formControlName="ph" class="form-control mb-1 form-i" type="number"
+                                placeholder="Enter Phone Number" /> -->
+                            <select formControlName="gender" class="form-select mb-1 form-i">
+                                <!-- <option>Select Status</option> -->
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <div *ngIf="addUser.get('gender')?.errors  && submitted">
+                                <div *ngIf="addUser.get('gender')?.hasError('required')">
+                                    <span style="color: red;">Please Select Gender.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-popup-actions">
+                        <button type="submit" class="btn mt-2 text-white "
+                            style=" background: linear-gradient(273.22deg, #E81653 0%, #990098 101.78%);">
+                            {{editMode ? 'UPDATE' : 'ADD'}}
+                        </button>
+                        <button type="button" class="btn mt-2 mx-2" style="border: 2px solid #e81653;color: #990098;"
+                            (click)="onClose()">
+                            CANCEL
+                        </button>
+                        <p>
+                            {{error}}
+                        </p>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

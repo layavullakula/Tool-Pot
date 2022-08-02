@@ -1,0 +1,105 @@
+<div class="priv-bg">
+    <div style="display: flex;">
+        <app-side-header>
+        </app-side-header>
+        <div class="priv-bg-right container">
+            <app-header *ngIf="!showInputField" style="max-height: 15vh;"></app-header>
+            <div class="row sty">
+                <div class="priv-header col-12">
+                    <h3>Manage Privileges</h3>
+                    <button class="priv-btn" (click)="showU = !showU">
+                        <fa-icon [icon]="plus" style="color: white;margin-right: 5px;"></fa-icon>
+                        New {{ showU ? 'Tool' : 'User'}} To Project
+                    </button>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="!loading">
+                <div class="col-xl-5 col-lg-5 col-sm-12 col-12 mb-5 priv-card" *ngFor="let i of privilegesD">
+                    <div class="m-2">
+                        <div style="display: flex;background-color: white;border-radius: 20px;min-height: 20vh;">
+                            <div class="text-center"
+                                style="padding: 10px;background-color: #ded9e9;min-width: 50%;max-width: 50%;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                                <h3 style="font-weight: bold;letter-spacing: 1px;">{{i.pName | titlecase}}</h3>
+                                <fa-icon [icon]="add" *ngIf="showU && i.pTeam?.length >= 1 && i.pTeam?.length < 5 "
+                                    (click)="addUserToProject(i.id,privilegesD.indexOf(i))"></fa-icon>
+                                <fa-icon [icon]="add" *ngIf="!showU && i.pTools?.length >= 1 && i.pTools?.length < 5 "
+                                    (click)="addToolToProject(i.id,privilegesD.indexOf(i))"></fa-icon>
+                            </div>
+                            <div *ngIf="showU"
+                                style="display: flex;flex-direction: column;justify-content: center;align-items: center;min-width: 50%;">
+
+                                <fa-icon [icon]="add" *ngIf="showU && i.pTeam?.length== null"
+                                    (click)="addUserToProject(i.id,privilegesD.indexOf(i))"></fa-icon>
+                                <fa-icon [icon]="add" *ngIf="!showU && i.pTools?.length== 0"
+                                    (click)="addToolToProject(i.id,privilegesD.indexOf(i))"></fa-icon>
+
+                                <ul style="list-style-type: none;" *ngIf="i.pTeam?.length>=1">
+                                    <li *ngFor="let j of i.pTeam" class="small">
+                                        {{j.split('@')[0]}}
+                                        <fa-icon style="margin-left: 10px;color: rgb(241, 100, 100);" [icon]="remove"
+                                            (click)="removeUser(i,j,privilegesD.indexOf(i))"></fa-icon>
+                                    </li>
+                                    <li *ngFor="let j of i.pTeam" class="big m-2">
+                                        {{j}}
+                                        <fa-icon style="margin-left: 10px;color: rgb(241, 100, 100);" [icon]="remove"
+                                            (click)="removeUser(i,j,privilegesD.indexOf(i))"></fa-icon>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div *ngIf="!showU"
+                                style="display: flex;flex-direction: column;justify-content: center;align-items: center;min-width: 50%;">
+
+                                <fa-icon [icon]="add" *ngIf="i.pTools?.length== 0"
+                                    (click)="addUserToProject(i.id,privilegesD.indexOf(i))"></fa-icon>
+
+                                <ul style="list-style-type: none;" *ngIf="i.pTools?.length>=1">
+
+                                    <li *ngFor="let j of i.pTools" class="big m-2">
+                                        {{j}}
+                                        <fa-icon style="margin-left: 10px;color: rgb(241, 100, 100);" [icon]="remove"
+                                            (click)="removeUser(i,j,privilegesD.indexOf(i))"></fa-icon>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="loading">
+                <app-loading-page></app-loading-page>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div *ngIf="showInputField">
+    <div class="back-form-popup" (click)="showInputField = !showInputField"></div>
+    <div class="form-popup">
+        <div class="container">
+            <div class="row">
+                <h1 class="col-12 text-center text-white">
+                    Add {{showU ? 'User': 'Tool'}}
+                </h1>
+                <form (ngSubmit)="onSubmit()" [formGroup]="addUser" *ngIf="showInputField" class="btn-sb">
+                    <select *ngIf="showU" class="form-select" formControlName="username">
+                        <option *ngFor="let user of userList">{{user}}</option>
+                    </select>
+                    <div *ngIf="addUser.get('username')?.errors  && submitted">
+                        <div *ngIf="addUser.get('username')?.hasError('required')">
+                            <span style="color: red;">Please Select Option.</span>
+                        </div>
+                    </div>
+                    <select *ngIf="!showU" class="form-select" formControlName="username">
+                        <option *ngFor="let tool of toolsList">{{tool}}</option>
+                    </select>
+                    <button type="submit" class="btn bg-white text-dark border border-white mt-2">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
